@@ -1,0 +1,14 @@
+---
+- hosts: server1.example.com
+  gather_facts: false
+  tasks:
+    - name: take time on server
+      shell: 'date'
+      register: date
+      changed_when: false
+
+    - name: save time to localhost
+      vars: 
+        record: "{{ inventory_hostname }} time: {{ date.stdout_lines[0] }}"
+      shell: "echo '{{ record }}' >> /tmp/times.txt"
+      delegate_to: localhost

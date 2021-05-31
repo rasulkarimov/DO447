@@ -1,0 +1,9 @@
+users:
+  johnd:
+    firstname: John
+    surname: Doe
+    pub_key_file: pubkeys/johnd/id_rsa.pub
+  janed:
+    firstname: Jane
+    surname: Doe
+    pub_key_file: pubkeys/janed/id_rsa.pub

@@ -1,0 +1,7 @@
+haproxy_appservers:
+  - name: servera.example.com
+    ip: 192.168.56.102
+    backend_port: 80
+  - name: serverb.example.com
+    ip: 192.168.56.103
+    backend_port: 80

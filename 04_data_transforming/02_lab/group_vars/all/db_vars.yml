@@ -1,0 +1,14 @@
+db_user_access:
+  - username: johnd
+    dept: sales
+    role: manager
+    db_list:
+      - employees
+      - invoices
+
+  - username: janed
+    dept: sales
+    role: associate
+    db_list:
+      - invoices
+      - inventory

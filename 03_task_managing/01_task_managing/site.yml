@@ -1,0 +1,7 @@
+---
+- name: Test deploted Web App
+  import_playbook: test_webapp.yml
+
+- name: Test message
+  import_playbook: test_message.yml
+

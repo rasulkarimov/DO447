@@ -1,0 +1,14 @@
+---
+- name: test messages
+  hosts: server1.example.com
+  tags:
+    - message
+  tasks:
+    - name: grep messag
+      command: cat /etc/hosts
+      register: messageout
+   
+    - name: pront
+      debug:
+        msg: "message registred"
+        

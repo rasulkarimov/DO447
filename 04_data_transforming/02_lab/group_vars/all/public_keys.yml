@@ -1,0 +1,9 @@
+---
+public_key_lists:
+  - username: johnd
+    public_keys:
+      - pubkeys/johnd/id_rsa.pub
+      - pubkeys/johnd/laptop_rsa.pub
+  - username: janed
+    public_keys:
+      - pubkeys/janed/id_rsa.pub

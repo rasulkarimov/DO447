@@ -1,0 +1,18 @@
+---
+- name: Enable Database Access
+  hosts: db_server
+  gather_facts: no
+  tasks:
+    - import_tasks: database_setup.yml
+
+    - name: Enable user access to database
+      mysql_user:
+        name: "{{ item.0.username }}"
+        priv: "{{ item.1 }}.*:ALL"
+        host: workstation.lab.example.com
+        append_privs: yes
+        password: "{{ user_passwords[item.0.username] }}"
+        state: present
+      with_subelements:
+        - "{{ db_user_access }}"
+        - db_list

@@ -1,0 +1,13 @@
+---
+- name: web app smoke test
+  hosts: server1.example.com
+  gather_facts: no
+  tasks:
+    - name: verify content of localhost http
+      uri:
+        url: http://localhost
+        return_content: yes
+      register: test_url
+      failed_when: "'Hello from' in test_url.content"
+      tags:
+        - tests

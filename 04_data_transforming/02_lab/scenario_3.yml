@@ -1,0 +1,19 @@
+---
+- name: Allow Developer Access To Dev Servers
+  hosts: dev_web_servers
+  gather_facts: no
+  tasks:
+    - name: Create shared account
+      user:
+        name: developer
+        state: present
+     
+    - name: Set up multiple authorized keys
+      authorized_key:
+        user: developer
+        state: present
+        key: "{{ item }}"
+      with_file:
+        - pubkeys/johnd/id_rsa.pub
+        - pubkeys/johnd/laptop_rsa.pub
+        - pubkeys/janed/id_rsa.pub
