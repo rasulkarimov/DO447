@@ -2,7 +2,7 @@
 - name: Deploy the web servers
   hosts: server1.example.com
   become: True
-  gather_facts: false
+  gather_facts: true
   tasks:
   - name: Ensure required packages are installed
     yum:
