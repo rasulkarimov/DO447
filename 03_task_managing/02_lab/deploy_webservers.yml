@@ -1,6 +1,6 @@
 ---
 - name: Deploy the web servers
-  hosts: server1.example.com
+  hosts: {{ hosts_list }}
   become: True
   gather_facts: true
   tasks:
