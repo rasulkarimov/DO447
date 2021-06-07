@@ -1,0 +1,12 @@
+---
+- name: play tasks
+  hosts: webservers
+  roles:
+    - apache
+    - webapp
+    - firewall
+
+- name: play tasks
+  hosts: localhost
+  roles:
+    - haproxy

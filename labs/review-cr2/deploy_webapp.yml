@@ -1,0 +1,17 @@
+---
+- name: 
+  hosts:
+  - pre_tasks:
+      - name: Ensure logging the deployment start
+        lineinfile:
+          path: /tmp/times.txt
+          create: yes
+          line: "{{ lookup('pipe','date') }}: Deploying version {{ webapp_version }} to {{ inventory_hostname }}"
+        delegate_to: localhost
+
+  - post_tasks:
+      - name: Ensure logging the deployment completion
+        lineinfile: 
+          path: /tmp/time.txt
+          line: "{{ lookup('pipe','date') }}: Deployment complete {{ webapp_version }} to {{ inventory_hostname }}"
+        delegate_to: localhost

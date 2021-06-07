@@ -1,0 +1,15 @@
+---
+# tasks file for roles/webapp
+- block:
+  - name: Ensure stub web content is deployed
+    copy:
+      content: "Hello from web server"
+      dest: "/var/www/html/index.html"        
+
+  - name: Ensure location files are created
+    template:
+      src: location.html.j2
+      dest: "/var/www/html/{{ item.name }}.html"
+    loop: "{{ lookup('file','location.yml') | from_yaml }}"
+
+  become: true

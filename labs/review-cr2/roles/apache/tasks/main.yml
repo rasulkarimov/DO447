@@ -1,0 +1,19 @@
+---
+# tasks file for roles/apache
+- block:
+  - name: Ensure httpd packeges are installed
+    yum:
+      name: httpd
+      state: present
+
+  - name: Ensure SELinux allows httpd connections to a remote database
+    seboolean:
+      name: httpd_can_network_connect_db
+      state: yes
+      persistent: yes
+
+  - name: Ensure httpd service is started and enabled
+    service: 
+      name: httpd
+      state: started
+      enabled: yes

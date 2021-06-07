@@ -1,0 +1,21 @@
+---
+# tasks file for roles/haproxy
+- block: 
+    - name: ensure haproxy packages are present
+      yum:
+        name: haproxy
+        state: present
+      
+    - name: ensure haproxy is started and enabled
+      service:
+        name: haproxy
+        state: started
+        enabled: true
+
+    - name: ensure haproxy configuration is set
+      template:
+        src: "haproxy.cfg.j2"
+        dest: "/etc/haproxy/haproxy.cfg"
+      notify: restart haproxy 
+
+  become: true

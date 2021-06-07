@@ -1,0 +1,9 @@
+---
+# tasks file for roles/firewall
+- name: Ensure Firewall Source Configuration
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+  become: true
+  notify: restart firewalld
