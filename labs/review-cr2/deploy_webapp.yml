@@ -1,17 +1,34 @@
 ---
-- name: 
-  hosts:
-  - pre_tasks:
-      - name: Ensure logging the deployment start
-        lineinfile:
-          path: /tmp/times.txt
-          create: yes
-          line: "{{ lookup('pipe','date') }}: Deploying version {{ webapp_version }} to {{ inventory_hostname }}"
-        delegate_to: localhost
-
-  - post_tasks:
-      - name: Ensure logging the deployment completion
-        lineinfile: 
-          path: /tmp/time.txt
-          line: "{{ lookup('pipe','date') }}: Deployment complete {{ webapp_version }} to {{ inventory_hostname }}"
-        delegate_to: localhost
+- name: Ensure web App is deployed
+  hosts: webservers
+  gather_facts: false
+  vars:
+    - webapp_version: "v1.0"
+  serial:
+    - 1
+    - 100% 
+  max_fail_percentage: 0
+  pre_tasks:
+    - name: Ensure logging the deployment start
+      lineinfile:
+        create: yes
+        line: "{{ lookup('pipe','date') }}: Deploying version {{ webapp_version }} to {{ inventory_hostname }}"
+        path: /tmp/times.txt
+      delegate_to: localhost
+ 
+  roles:
+    - apache
+    - webapp
+    - firewall
+  
+  tasks:
+    - import_role: 
+        name: haproxy
+      delegate_to: localhost
+  
+  post_tasks:
+    - name: Ensure logging the deployment completion
+      lineinfile: 
+        line: "{{ lookup('pipe','date') }}: Deployment complete {{ webapp_version }} to {{ inventory_hostname }}"
+        path: /tmp/times.txt
+      delegate_to: localhost
