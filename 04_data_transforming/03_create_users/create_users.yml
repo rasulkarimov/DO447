@@ -1,0 +1,10 @@
+---
+- name: crete users playbook
+  hosts: webservers
+  tasks:
+    - name: creating users
+      user:
+        name: "{{ item.name }}"
+        password: "{{ lookup('password', item.name + ' length=9') | password_hash('sha512') }}"  
+        state: present
+      loop: "{{ users }}"

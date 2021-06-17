@@ -1,7 +1,4 @@
-webservers:
-  hosts: 
-    192.168.56.103:
-
-haproxy:
-  hosts: 
-    192.168.56.101:
+[webservers] 
+192.168.56.103
+[haproxy]
+192.168.56.101

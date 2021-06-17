@@ -1,0 +1,12 @@
+users:
+  - name: john
+    uid: 1003
+    group: test
+    authorized:
+      - john.pub
+      - milla.pub
+  - name: milla
+    uid: 1009
+    group: dev
+    authorized:
+      - milla.pub

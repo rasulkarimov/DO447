@@ -1,0 +1,9 @@
+---
+- name: crete users playbook
+  hosts: webservers
+  tasks:
+    - name: creating users
+      authorized_key:
+        user: "{{ item.0.name }}"
+        key: "{{ lookup('file', item.1) }}"
+      loop: "{{ users | subelements('authorized') }}"

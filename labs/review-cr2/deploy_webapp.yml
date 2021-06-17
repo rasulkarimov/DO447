@@ -14,7 +14,7 @@
         create: yes
         line: "{{ lookup('pipe','date') }}: Deploying version {{ webapp_version }} to {{ inventory_hostname }}"
         path: /tmp/times.txt
-      delegate_to: localhost
+      delegate_to: 192.168.56.102
  
   roles:
     - apache
@@ -31,4 +31,4 @@
       lineinfile: 
         line: "{{ lookup('pipe','date') }}: Deployment complete {{ webapp_version }} to {{ inventory_hostname }}"
         path: /tmp/times.txt
-      delegate_to: localhost
+      delegate_to: 192.168.56.102
